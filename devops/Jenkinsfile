@@ -18,16 +18,16 @@ pipeline {
 	  }
 	}
 	stage('Lint') {
-	      agent {
-		docker {
-		  image 'maven:3.8.6-openjdk-11-slim'
-		}
-	      }
-	      steps {
-		echo 'Ejecutando Lint'
-		sh 'make lint'
-	      }
+	  agent {
+	    docker {
+	      image 'maven:3.8.6-openjdk-11-slim'
 	    }
+	  }
+	  steps {
+	    sh 'apt-get update && apt-get install -y make'
+	    sh 'make lint'
+	  }
+	}
     	stage('Test') {
 	      agent {
 		docker {
